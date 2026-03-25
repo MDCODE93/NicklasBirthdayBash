@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Invitation QR</title>
+    <meta name="description" content="QR code for birthday invitation">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="page-wrap">
+        <article class="invitation-card">
+            <section class="hero">
+                <p class="kicker">Scan To Open</p>
+                <h1>Birthday Invite QR Code</h1>
+                <p class="subtitle">Print this page or save the QR image and share it with your guests.</p>
+            </section>
+
+            <section class="content">
+                <div class="details">
+                    <h2 class="section-title">How To Use</h2>
+                    <div class="data-row">
+                        <div class="label">Step 1</div>
+                        <div class="value">Set GitHub username and repository values below.</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="label">Step 2</div>
+                        <div class="value">Open this page in browser and verify the generated URL.</div>
+                    </div>
+                    <div class="data-row">
+                        <div class="label">Step 3</div>
+                        <div class="value">Download the QR image or print this page and share.</div>
+                    </div>
+                    <p class="note">Current URL encoded in the QR:</p>
+                    <a id="invite-link" class="link" href="#" target="_blank" rel="noopener noreferrer">Loading invitation link...</a>
+                    <p id="status-message" class="note"></p>
+                    <div class="note" style="margin-top: 18px;">
+                        Paste your public invite URL here:
+                    </div>
+                    <input id="url-input" type="url" placeholder="https://your-domain.com/birthday-invite/nicklasbirthdaybash.html" style="width: 100%; margin-top: 8px; padding: 10px 12px; border: 1px solid rgba(36,31,26,0.2); border-radius: 10px; font: inherit;">
+                    <a id="generate-btn" class="cta" href="#" style="margin-top: 12px;">Generate QR From URL</a>
+                </div>
+
+                <div class="rsvp qr-panel">
+                    <h2 class="section-title">Scan Me</h2>
+                    <div class="qr-frame">
+                        <img id="qr-image" src="" alt="QR code for invitation page">
+                    </div>
+                    <a id="download-link" class="cta" href="#" download="birthday-invitation-qr.png">Download QR Image</a>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <script>
+        const CUSTOM_PUBLIC_URL = "";
+        const GITHUB_USERNAME = "MDCODE93";
+        const GITHUB_REPOSITORY = "NicklasBirthdayBash";
+        const DEFAULT_TARGET_PAGE = "nicklasbirthdaybash.html";
+        const isHttp = window.location.protocol === "http:" || window.location.protocol === "https:";
+        const autoInviteUrl = isHttp ? new URL(DEFAULT_TARGET_PAGE, window.location.href).href : "";
+        const storedUrl = localStorage.getItem("birthdayInviteUrl") || "";
+
+        function buildGithubPagesUrl() {
+            const user = GITHUB_USERNAME.trim();
+            const repo = GITHUB_REPOSITORY.trim();
+            if (!user || !repo || user === "YOUR_GITHUB_USERNAME" || repo === "YOUR_REPOSITORY_NAME") {
+                return "";
+            }
+            return "https://" + user + ".github.io/" + repo + "/birthday-invite/" + DEFAULT_TARGET_PAGE;
+        }
+
+        const githubPagesUrl = buildGithubPagesUrl();
+        let inviteUrl = CUSTOM_PUBLIC_URL.trim() || storedUrl || githubPagesUrl || (isHttp ? autoInviteUrl : "");
+
+        const qrImage = document.getElementById("qr-image");
+        const inviteLink = document.getElementById("invite-link");
+        const downloadLink = document.getElementById("download-link");
+        const statusMessage = document.getElementById("status-message");
+        const urlInput = document.getElementById("url-input");
+        const generateBtn = document.getElementById("generate-btn");
+
+        function looksLikeHttpUrl(value) {
+            return /^https?:\/\//i.test(value);
+        }
+
+        function renderQr(url) {
+            const qrSource = url
+                ? "https://quickchart.io/qr?size=720&ecLevel=H&text=" + encodeURIComponent(url)
+                : "";
+
+            qrImage.src = qrSource;
+            inviteLink.href = url || "#";
+            inviteLink.textContent = url || "No valid URL yet";
+            downloadLink.href = qrSource || "#";
+
+            if (!url) {
+                statusMessage.textContent = "No URL yet. Set GitHub constants in this file or paste a public URL and click Generate QR From URL.";
+                downloadLink.style.pointerEvents = "none";
+                downloadLink.style.opacity = "0.6";
+                return;
+            }
+
+            statusMessage.textContent = "QR ready. Scanning should open your invitation page.";
+            downloadLink.style.pointerEvents = "auto";
+            downloadLink.style.opacity = "1";
+        }
+
+        urlInput.value = inviteUrl;
+        renderQr(inviteUrl);
+
+        generateBtn.addEventListener("click", function (event) {
+            event.preventDefault();
+            const candidate = urlInput.value.trim();
+
+            if (!looksLikeHttpUrl(candidate)) {
+                statusMessage.textContent = "Please enter a valid URL starting with http:// or https://.";
+                return;
+            }
+
+            inviteUrl = candidate;
+            localStorage.setItem("birthdayInviteUrl", inviteUrl);
+            renderQr(inviteUrl);
+        });
+    </script>
+</body>
+</html>
