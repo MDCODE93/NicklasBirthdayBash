@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-    <link rel="stylesheet" href="styles.css?v=20260329-2">
+    <link rel="stylesheet" href="styles.css?v=20260329-3">
 </head>
 <body>
     <main class="page-wrap">
@@ -106,12 +106,7 @@ Kh M&M's</textarea>
                     </div>
 
                     <section id="route-map-section" class="route-map" aria-live="polite" hidden>
-                        <h2 class="section-title date-poll-title">Map For Meeting Points</h2>
-                        <p class="note">The selected date(s) activate this map. It links all three locations in one route.</p>
-                        <label class="preview-toggle">
-                            <input id="route-preview-toggle" type="checkbox" checked>
-                            <span>Show Neon Route Preview</span>
-                        </label>
+                        <input id="route-preview-toggle" type="checkbox" checked hidden>
                         <p id="description-countdown" class="countdown-text" hidden></p>
                         <div id="route-preview-content">
                             <div class="location-panels" aria-label="Location boxes with descriptions">
@@ -285,6 +280,11 @@ Kh M&M's</textarea>
 
         function syncPhotoColumnOffset() {
             if (descriptionPhotoColumn.hidden || mapSection.hidden || routePreviewContent.hidden) {
+                return;
+            }
+
+            if (window.innerWidth <= 760) {
+                descriptionPhotoColumn.style.transform = "translateY(0px)";
                 return;
             }
 
