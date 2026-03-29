@@ -116,7 +116,7 @@ Kh M&M's</textarea>
                                     <button class="description-toggle" type="button" data-target="media-stop-1" data-photo-target="photo-stop-1">Beskrivelse</button>
                                     <div id="media-stop-1" class="description-media" hidden>
                                         <p id="desc-stop-1" class="location-description">Dansen begynder. Her kan det være godt at have to bostøtter tilknyttet, 
-                                            hvis der er mere end 5 minutter på gåben hjem. Det kan jo være, at der er noget med silden.
+                                            hvis der er mere end 5 minutter på gåben hjem. Det kan jo være, at der er noget med ålen.
                                    .</p>
                                     </div>
                                 </article>
@@ -126,7 +126,7 @@ Kh M&M's</textarea>
                                     <button class="description-toggle" type="button" data-target="media-stop-2" data-photo-target="photo-stop-2">Beskrivelse</button>
                                     <div id="media-stop-2" class="description-media" hidden>
                                         <p id="desc-stop-2" class="location-description">Alt efter, hvordan vejret udfolder sig, fungerer dette sted som herberg/forsorgshjem/varmestue.
-                                            Med mulighed for en kop vand og vurdering af sildens indvirkning, kan dette være den anden lokation.</p>
+                                            Med mulighed for en kop vand og vurdering af ålens indvirkning, kan dette være den anden lokation.</p>
                                     </div>
                                 </article>
                                 <article class="location-panel">
@@ -134,7 +134,7 @@ Kh M&M's</textarea>
                                     <p class="location-time">23:10 - hvad guilty feet kan holde til</p>
                                     <button class="description-toggle" type="button" data-target="media-stop-3" data-photo-target="photo-stop-3">Beskrivelse</button>
                                     <div id="media-stop-3" class="description-media" hidden>
-                                        <p id="desc-stop-3" class="location-description">Her skal slaget stå. Med guilty feet på og sildeånde, er der rig mulighed
+                                        <p id="desc-stop-3" class="location-description">Her skal slaget stå. Med guilty feet på og åleånde, er der rig mulighed
                                             for en spand pink pussy eller flyversjusser ala Laurits. Alt efter ens success, er der mulighed for overnatning på herberget, hvor man
                                             fx kan få forklaret, hvad ord som "intrigant" betyder.
                                             .</p>
@@ -230,7 +230,6 @@ Kh M&M's</textarea>
         let routeLoaded = false;
         let descriptionPanelTimer = null;
         let descriptionCountdownInterval = null;
-        let activeDescriptionTargetId = null;
 
         function clearDescriptionTimers() {
             clearTimeout(descriptionPanelTimer);
@@ -256,7 +255,6 @@ Kh M&M's</textarea>
             descriptionPhotoColumn.hidden = true;
             descriptionPhotoColumn.style.marginTop = "0px";
             descriptionPhotoColumn.style.transform = "translateY(0px)";
-            activeDescriptionTargetId = null;
         }
 
         function updatePhotoColumnVisibility() {
@@ -502,8 +500,6 @@ Kh M&M's</textarea>
 
                 descriptionMedia.hidden = !descriptionMedia.hidden;
                 button.textContent = descriptionMedia.hidden ? "Beskrivelse" : "Skjul Beskrivelse";
-
-                activeDescriptionTargetId = targetId;
 
                 updatePhotoColumnVisibility();
                 syncPhotoColumnOffset();

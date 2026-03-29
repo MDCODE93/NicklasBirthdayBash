@@ -92,10 +92,6 @@
         const urlInput = document.getElementById("url-input");
         const generateBtn = document.getElementById("generate-btn");
 
-        function looksLikeHttpUrl(value) {
-            return /^https?:\/\//i.test(value);
-        }
-
         function renderQr(url) {
             const qrSource = url
                 ? "https://quickchart.io/qr?size=720&ecLevel=H&text=" + encodeURIComponent(url)
