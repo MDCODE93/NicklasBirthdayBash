@@ -3,57 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Birthday Invitation</title>
     <meta name="description" content="Birthday invitation page">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="styles.css?v=20260329-2">
 </head>
 <body>
     <main class="page-wrap">
         <article class="invitation-card">
             <section class="hero">
-                <p class="kicker">You are invited</p>
-                <h1>Emma's Birthday Evening</h1>
-                <p class="subtitle">Come celebrate with food, music, and a few birthday surprises. Bring your best dancing mood.</p>
+                <div class="hero-title-wrap">
+                    <img class="hero-title-photo" src="assets/Background.jpg" alt="Dog photo behind title">
+                    <p class="kicker">Du er inviteret</p>
+                    <h1>Nicklas Birthday Bash</h1>
+                    <p class="subtitle">Velkommen til en dag i godt selskab....</p>
+                </div>
             </section>
 
             <section class="content">
-                <div class="details">
-                    <h2 class="section-title">Event Details</h2>
+                <div id="details-column" class="details">
+                    <h2 class="section-title">Detaljer</h2>
 
                     <div class="data-row">
-                        <div class="label">Date</div>
-                        <div class="value">Saturday, 18 July 2026</div>
+                        <div class="label">Dato</div>
+                        <div class="value">Tjek Din Kalender</div>
                     </div>
 
                     <div class="data-row">
-                        <div class="label">Time</div>
-                        <div class="value">19:00 until late</div>
+                        <div class="label">Tidspunkt</div>
+                        <div class="value">15:00 - Dine Guilty Feet Ombestemmer Sig</div>
                     </div>
 
                     <div class="data-row">
-                        <div class="label">Place</div>
-                        <div class="value">Riverside Loft, Main Street 24, 10115 Berlin</div>
+                        <div class="label">Sted</div>
+                        <div class="value">Ekstremguidet Aarhus Tur</div>
                     </div>
 
                     <div class="data-row">
-                        <div class="label">Theme</div>
-                        <div class="value">Summer Cocktail Chic</div>
+                        <div class="label">Tema</div>
+                        <div class="value">Nicklas/George Michael</div>
                     </div>
 
-                    <a class="cta" href="https://maps.google.com/?q=Riverside+Loft+Main+Street+24+10115+Berlin" target="_blank" rel="noopener noreferrer">
-                        Open in Maps
-                    </a>
+                    <section id="description-photo-column" class="description-photo-column" aria-label="Beskrivelse billeder" hidden>
+                        <figure id="photo-stop-1" class="description-photo-card" hidden>
+                            <img class="description-photo" src="assets/Sønder Allé 3.jpeg" alt="Beskrivelse billede for Sonder Alle 3">
+                        </figure>
+                        <figure id="photo-stop-2" class="description-photo-card" hidden>
+                            <img class="description-photo" src="assets/Telefonsmøgen 24.JPG" alt="Beskrivelse billede for Telefonsmogen 24">
+                        </figure>
+                        <figure id="photo-stop-3" class="description-photo-card" hidden>
+                            <img class="description-photo" src="assets/Skolegade 28.jpg" alt="Beskrivelse billede for Skolegade 28">
+                        </figure>
+                    </section>
+
                 </div>
 
                 <div class="rsvp">
-                    <h2 class="section-title">RSVP</h2>
-                    <p>Please confirm before 05 July 2026.</p>
-                    <a class="cta" href="mailto:emma@example.com?subject=Birthday%20RSVP">Send RSVP Email</a>
-                    <p class="note">You can also message: +49 170 0000000</p>
-                    <p class="note">Dietary restrictions are very welcome, just mention them in your RSVP.</p>
+                    <h2 class="section-title date-poll-title">Invitation</h2>
+                    <textarea class="invite-text" rows="6" placeholder="Write your invitation text here...">Kære Nicklas
+
+Hjerteligt tillykke med de 45 år i denne til tider barske verden - 'kæft du holder dig godt!
+"Kommer George Michael?" - lyder det stadig blandt Aarhus-venner, der har været så heldige at møde dig.
+For du er noget særligt, og det skal fejres.
+Vi håber, du får en helt fantastisk aften, og vi glæder os til endnu flere gode stunder.
+
+Hip hip og alt godt fra bunden af Vejle Fjord!
+
+Kh M&M's</textarea>
+
+                    <h2 class="section-title date-poll-title">Vælg En Dato, Jo</h2>
+                    <div class="date-options" role="group" aria-label="Choose possible dates">
+                        <label class="date-option">
+                            <input type="checkbox" name="possible-date" value="2026-05-16_2026-05-17">
+                            <span>16.-17. Maj</span>
+                        </label>
+                        <label class="date-option">
+                            <input type="checkbox" name="possible-date" value="2026-05-22_2026-05-23">
+                            <span>22.-23. Maj</span>
+                        </label>
+                        <label class="date-option">
+                            <input type="checkbox" name="possible-date" value="2026-06-13_2026-06-14">
+                            <span>13.-14. Juni</span>
+                        </label>
+                        <label class="date-option">
+                            <input type="checkbox" name="possible-date" value="2026-06-27_2026-06-28">
+                            <span>27.-28. Juni</span>
+                        </label>
+                        <label class="date-option">
+                            <input type="checkbox" name="possible-date" value="2026-07-17_2026-07-18">
+                            <span>17.-18. Juli</span>
+                        </label>
+                        <label class="date-option">
+                            <input type="checkbox" name="possible-date" value="2026-07-18_2026-07-19">
+                            <span>18.-19. Juli</span>
+                        </label>
+                    </div>
+
+                    <section id="route-map-section" class="route-map" aria-live="polite" hidden>
+                        <h2 class="section-title date-poll-title">Map For Meeting Points</h2>
+                        <p class="note">The selected date(s) activate this map. It links all three locations in one route.</p>
+                        <label class="preview-toggle">
+                            <input id="route-preview-toggle" type="checkbox" checked>
+                            <span>Show Neon Route Preview</span>
+                        </label>
+                        <p id="description-countdown" class="countdown-text" hidden></p>
+                        <div id="route-preview-content">
+                            <div class="location-panels" aria-label="Location boxes with descriptions">
+                                <article class="location-panel">
+                                    <h3>Sønder Allé 3</h3>
+                                    <p class="location-time">15:00-18:00</p>
+                                    <button class="description-toggle" type="button" data-target="media-stop-1" data-photo-target="photo-stop-1">Beskrivelse</button>
+                                    <div id="media-stop-1" class="description-media" hidden>
+                                        <p id="desc-stop-1" class="location-description">Dansen begynder. Her kan det være godt at have to bostøtter tilknyttet, 
+                                            hvis der er mere end 5 minutter på gåben hjem. Det kan jo være, at der er noget med silden.
+                                   .</p>
+                                    </div>
+                                </article>
+                                <article class="location-panel">
+                                    <h3>Telefonsmøgen 24 / Herberg (Døgnåbent)</h3>
+                                    <p class="location-time">18:10-23:00</p>
+                                    <button class="description-toggle" type="button" data-target="media-stop-2" data-photo-target="photo-stop-2">Beskrivelse</button>
+                                    <div id="media-stop-2" class="description-media" hidden>
+                                        <p id="desc-stop-2" class="location-description">Alt efter, hvordan vejret udfolder sig, fungerer dette sted som herberg/forsorgshjem/varmestue.
+                                            Med mulighed for en kop vand og vurdering af sildens indvirkning, kan dette være den anden lokation.</p>
+                                    </div>
+                                </article>
+                                <article class="location-panel">
+                                    <h3>Skolegade 28</h3>
+                                    <p class="location-time">23:10 - hvad guilty feet kan holde til</p>
+                                    <button class="description-toggle" type="button" data-target="media-stop-3" data-photo-target="photo-stop-3">Beskrivelse</button>
+                                    <div id="media-stop-3" class="description-media" hidden>
+                                        <p id="desc-stop-3" class="location-description">Her skal slaget stå. Med guilty feet på og sildeånde, er der rig mulighed
+                                            for en spand pink pussy eller flyversjusser ala Laurits. Alt efter ens success, er der mulighed for overnatning på herberget, hvor man
+                                            fx kan få forklaret, hvad ord som "intrigant" betyder.
+                                            .</p>
+                                    </div>
+                                    <div id="skolegade-flow" class="skolegade-flow" hidden>
+                                        <button id="tryk-btn" class="cta" type="button">Tryk</button>
+
+                                        <button id="question-btn" class="flow-btn" type="button" hidden>Som en anden god skoledreng, er det vigtigt at have læst hele opgaven, hvis man skal forstå den. Har du nu læst det hele og forstået, hvad der skal ske, Nicklas?</button>
+
+                                        <div id="yesno-boxes" class="choice-boxes" hidden>
+                                            <button id="choice-ja" class="choice-btn" type="button">Ja</button>
+                                            <button id="choice-nej" class="choice-btn" type="button">Nej</button>
+                                        </div>
+
+                                        <p id="nej-message" class="warning-box" hidden>Kære Nicklas forældre, I skal have jeres folkeskolepenge tilbage.
+                                            Ellers underviser Mille i dansk på integrationsniveau.
+                                        </p>
+
+                                        <aside id="confirmation-box" class="confirmation-box" hidden>
+                                            <p>Flot Nicklas, hvis dette er din endelige beslutning, så tryk på Send Bekræftelse. Husk, ingen reklamationsret er forbeholdt.</p>
+                                            <a id="confirm-email-btn" class="cta" href="#">Send Bekræftelse</a>
+                                        </aside>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="route-map-stack">
+                                <div id="route-map-canvas" class="route-map-canvas" aria-label="Connected route map"></div>
+                                <div class="route-schedule" aria-label="Time schedule for route stops">
+                                <p><strong>Sønder Allé 3:</strong> 15:00-18:00</p>
+                                <p><strong>Telefonsmøgen 24 / Herberg (Døgnåbent):</strong> 18:10-23:00</p>
+                                <p><strong>Skolegade 28:</strong> 23:10 - hvad guilty feet kan holde til</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </section>
         </article>
@@ -63,5 +184,403 @@
             <a class="link" href="qr.html">the QR page</a>.
         </p>
     </main>
+
+    <div id="photo-lightbox" class="photo-lightbox" hidden>
+        <button id="photo-lightbox-close" class="photo-lightbox-close" type="button" aria-label="Close image">Luk</button>
+        <img id="photo-lightbox-image" class="photo-lightbox-image" src="" alt="Expanded photo preview">
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        const dateInputs = document.querySelectorAll('input[name="possible-date"]');
+        const mapSection = document.getElementById("route-map-section");
+        const mapCanvas = document.getElementById("route-map-canvas");
+        const routePreviewToggle = document.getElementById("route-preview-toggle");
+        const routePreviewContent = document.getElementById("route-preview-content");
+        const locationPanels = document.querySelector(".location-panels");
+        const detailsColumn = document.getElementById("details-column");
+        const descriptionPhotoColumn = document.getElementById("description-photo-column");
+        const descriptionCountdown = document.getElementById("description-countdown");
+        const descriptionButtons = document.querySelectorAll(".description-toggle");
+        const descriptionPhotoCards = document.querySelectorAll(".description-photo-card");
+        const descriptionPhotos = document.querySelectorAll(".description-photo");
+        const photoLightbox = document.getElementById("photo-lightbox");
+        const photoLightboxImage = document.getElementById("photo-lightbox-image");
+        const photoLightboxClose = document.getElementById("photo-lightbox-close");
+        const confirmationBox = document.getElementById("confirmation-box");
+        const confirmEmailBtn = document.getElementById("confirm-email-btn");
+        const skolegadeFlow = document.getElementById("skolegade-flow");
+        const trykBtn = document.getElementById("tryk-btn");
+        const questionBtn = document.getElementById("question-btn");
+        const yesNoBoxes = document.getElementById("yesno-boxes");
+        const choiceJa = document.getElementById("choice-ja");
+        const choiceNej = document.getElementById("choice-nej");
+        const nejMessage = document.getElementById("nej-message");
+
+        const routeStops = [
+            {
+                address: "Sønder Allé 3, 8000 Aarhus",
+                time: "15:00-18:00",
+                fallbackCoords: [56.1496, 10.2057]
+            },
+            {
+                address: "Telefonsmøgen 24 / Herberg (Døgnåbent), 8000 Aarhus",
+                time: "18:10-23:00",
+                geocodeQuery: "Telefonsmøgen 24, 8000 Aarhus",
+                fallbackCoords: [56.1547, 10.2100]
+            },
+            {
+                address: "Skolegade 28, 8000 Aarhus",
+                time: "23:10 - hvad guilty feet kan holde til",
+                fallbackCoords: [56.1555, 10.2106]
+            }
+        ];
+        let routeMap = null;
+        let routeLoaded = false;
+        let descriptionPanelTimer = null;
+        let descriptionCountdownInterval = null;
+        let activeDescriptionTargetId = null;
+
+        function clearDescriptionTimers() {
+            clearTimeout(descriptionPanelTimer);
+            clearInterval(descriptionCountdownInterval);
+            descriptionCountdown.hidden = true;
+            descriptionCountdown.textContent = "";
+        }
+
+        function resetDescriptionPanelsAndPhotos() {
+            descriptionButtons.forEach((button) => {
+                const targetId = button.getAttribute("data-target");
+                const descriptionMedia = targetId ? document.getElementById(targetId) : null;
+                if (descriptionMedia) {
+                    descriptionMedia.hidden = true;
+                }
+                button.textContent = "Beskrivelse";
+            });
+
+            descriptionPhotoCards.forEach((card) => {
+                card.hidden = true;
+            });
+
+            descriptionPhotoColumn.hidden = true;
+            descriptionPhotoColumn.style.marginTop = "0px";
+            descriptionPhotoColumn.style.transform = "translateY(0px)";
+            activeDescriptionTargetId = null;
+        }
+
+        function updatePhotoColumnVisibility() {
+            const skolegadeDescriptionMedia = document.getElementById("media-stop-3");
+            const hasUnlockedPhotos = skolegadeDescriptionMedia ? !skolegadeDescriptionMedia.hidden : false;
+
+            if (!hasUnlockedPhotos) {
+                descriptionPhotoCards.forEach((card) => {
+                    card.hidden = true;
+                });
+                descriptionPhotoColumn.hidden = true;
+                descriptionPhotoColumn.style.transform = "translateY(0px)";
+                return;
+            }
+
+            descriptionPhotoCards.forEach((card) => {
+                card.hidden = false;
+            });
+            descriptionPhotoColumn.hidden = false;
+        }
+
+        function syncPhotoColumnOffset() {
+            if (descriptionPhotoColumn.hidden || mapSection.hidden || routePreviewContent.hidden) {
+                return;
+            }
+
+            const anchorPanel = locationPanels ? locationPanels.querySelector(".location-panel") : null;
+
+            if (!anchorPanel || !detailsColumn) {
+                return;
+            }
+
+            const photoColumnRect = descriptionPhotoColumn.getBoundingClientRect();
+            const panelRect = anchorPanel.getBoundingClientRect();
+            const delta = panelRect.top - photoColumnRect.top;
+            descriptionPhotoColumn.style.transform = "translateY(" + delta + "px)";
+        }
+
+        function getSelectedDateLabels() {
+            return Array.from(dateInputs)
+                .filter((input) => input.checked)
+                .map((input) => {
+                    const labelSpan = input.nextElementSibling;
+                    return labelSpan ? labelSpan.textContent.trim() : input.value;
+                });
+        }
+
+        function buildConfirmationEmailHref() {
+            const selectedDates = getSelectedDateLabels();
+            const dateText = selectedDates.length ? selectedDates.join(", ") : "Ingen dato valgt";
+            const subject = "Bekræftelse af valgt dato";
+            const bodyText =
+                "Kære Martin og Mille\n\n" +
+                "Det er jer to, jeg ser allermest op til i hele verden.\n\n" +
+                "Jeg har ryddet min kalender (" + dateText + ").\n\n" +
+                "Jeg er yderst taknemmelig for, at I vil bruge en dag sammen med\n" +
+                "en pøbel-figur som mig, da jeg ved, at I har rigtigt travlt.\n\n" +
+                "Yderst taknemmelige pøbel-hilsner\n\n" +
+                "Nicklas";
+            return "mailto:martin.davidsen07@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(bodyText);
+        }
+
+        function resetSkolegadeFlow() {
+            skolegadeFlow.hidden = true;
+            questionBtn.hidden = true;
+            yesNoBoxes.hidden = true;
+            nejMessage.hidden = true;
+            confirmationBox.hidden = true;
+            choiceJa.classList.remove("is-selected");
+            choiceNej.classList.remove("is-selected");
+        }
+
+        function showSkolegadeFlowIfDescriptionOpen() {
+            const skolegadeDescriptionMedia = document.getElementById("media-stop-3");
+            const isOpen = skolegadeDescriptionMedia ? !skolegadeDescriptionMedia.hidden : false;
+
+            if (!isOpen) {
+                resetSkolegadeFlow();
+                return;
+            }
+
+            skolegadeFlow.hidden = false;
+            questionBtn.hidden = true;
+            yesNoBoxes.hidden = true;
+            nejMessage.hidden = true;
+            confirmationBox.hidden = true;
+            choiceJa.classList.remove("is-selected");
+            choiceNej.classList.remove("is-selected");
+            confirmEmailBtn.href = buildConfirmationEmailHref();
+        }
+
+        function startDescriptionCountdown() {
+            let remainingSeconds = 15;
+            descriptionCountdown.hidden = false;
+            descriptionCountdown.textContent = "OMGOMGOMGOMGOMG - Beskrivelser vises om " + remainingSeconds + " sekunder...";
+
+            descriptionCountdownInterval = setInterval(() => {
+                remainingSeconds -= 1;
+                if (remainingSeconds > 0) {
+                    descriptionCountdown.textContent = "OMGOMGOMGOMGOMG - Beskrivelser vises om " + remainingSeconds + " sekunder...";
+                }
+            }, 1000);
+
+            descriptionPanelTimer = setTimeout(() => {
+                locationPanels.classList.add("is-visible");
+                clearDescriptionTimers();
+            }, 15000);
+        }
+
+        async function geocodeAddress(addressOrQuery) {
+            const query = encodeURIComponent(addressOrQuery);
+            const url = "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + query;
+            const response = await fetch(url, {
+                headers: {
+                    "Accept": "application/json"
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error("Geocoding request failed");
+            }
+
+            const data = await response.json();
+            if (!data.length) {
+                throw new Error("Address not found");
+            }
+
+            return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+        }
+
+        async function renderConnectedMap() {
+            if (routeLoaded) {
+                return;
+            }
+
+            const points = await Promise.all(routeStops.map(async (stop) => {
+                try {
+                    const query = stop.geocodeQuery || stop.address;
+                    return await geocodeAddress(query);
+                } catch {
+                    if (Array.isArray(stop.fallbackCoords) && stop.fallbackCoords.length === 2) {
+                        return stop.fallbackCoords;
+                    }
+                    throw new Error("No usable coordinates for stop: " + stop.address);
+                }
+            }));
+            routeMap = L.map(mapCanvas, { scrollWheelZoom: false });
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "&copy; OpenStreetMap contributors"
+            }).addTo(routeMap);
+
+            points.forEach((point, index) => {
+                const stop = routeStops[index];
+                const neonMarker = L.divIcon({
+                    className: "neon-marker",
+                    html: "<span>" + (index + 1) + "</span>",
+                    iconSize: [28, 28],
+                    iconAnchor: [14, 14]
+                });
+
+                L.marker(point)
+                    .setIcon(neonMarker)
+                    .addTo(routeMap)
+                    .bindPopup("Stop " + (index + 1) + ": " + stop.address + "<br><strong>Time:</strong> " + stop.time)
+                    .bindTooltip(stop.time, { permanent: true, direction: "top", offset: [0, -10] });
+            });
+
+            const routeLine = L.polyline(points, {
+                color: "#22c56e",
+                weight: 4,
+                opacity: 0.85
+            }).addTo(routeMap);
+
+            routeMap.fitBounds(routeLine.getBounds(), { padding: [26, 26] });
+            routeLoaded = true;
+        }
+
+        function updateMapVisibility() {
+            const hasSelection = Array.from(dateInputs).some((input) => input.checked);
+            const previewEnabled = routePreviewToggle.checked;
+
+            if (!hasSelection) {
+                mapSection.hidden = true;
+                mapCanvas.classList.remove("is-expanded");
+                locationPanels.classList.remove("is-visible");
+                clearDescriptionTimers();
+                resetDescriptionPanelsAndPhotos();
+                resetSkolegadeFlow();
+                return;
+            }
+
+            mapSection.hidden = false;
+            mapCanvas.classList.add("is-expanded");
+            routePreviewContent.hidden = !previewEnabled;
+            syncPhotoColumnOffset();
+
+            if (!previewEnabled) {
+                locationPanels.classList.remove("is-visible");
+                clearDescriptionTimers();
+                resetDescriptionPanelsAndPhotos();
+                resetSkolegadeFlow();
+                return;
+            }
+
+            locationPanels.classList.remove("is-visible");
+            clearDescriptionTimers();
+            resetDescriptionPanelsAndPhotos();
+            startDescriptionCountdown();
+
+            renderConnectedMap()
+                .then(() => {
+                    if (routeMap) {
+                        setTimeout(() => routeMap.invalidateSize(), 80);
+                    }
+                    setTimeout(syncPhotoColumnOffset, 30);
+                })
+                .catch(() => {
+                    mapCanvas.innerHTML = "<p class=\"note\">Could not load the embedded route map preview right now. Try reloading the page.</p>";
+                });
+
+            showSkolegadeFlowIfDescriptionOpen();
+        }
+
+        dateInputs.forEach((input) => {
+            input.addEventListener("change", updateMapVisibility);
+        });
+
+        routePreviewToggle.addEventListener("change", updateMapVisibility);
+
+        descriptionButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const targetId = button.getAttribute("data-target");
+                const descriptionMedia = document.getElementById(targetId);
+                if (!descriptionMedia) {
+                    return;
+                }
+
+                descriptionMedia.hidden = !descriptionMedia.hidden;
+                button.textContent = descriptionMedia.hidden ? "Beskrivelse" : "Skjul Beskrivelse";
+
+                activeDescriptionTargetId = targetId;
+
+                updatePhotoColumnVisibility();
+                syncPhotoColumnOffset();
+
+                if (targetId === "media-stop-3") {
+                    showSkolegadeFlowIfDescriptionOpen();
+                } else {
+                    resetSkolegadeFlow();
+                }
+            });
+        });
+
+        descriptionPhotos.forEach((photo) => {
+            photo.tabIndex = 0;
+            photo.addEventListener("click", () => {
+                photoLightboxImage.src = photo.src;
+                photoLightboxImage.alt = photo.alt || "Expanded photo preview";
+                photoLightbox.hidden = false;
+            });
+            photo.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    photo.click();
+                }
+            });
+        });
+
+        photoLightboxClose.addEventListener("click", () => {
+            photoLightbox.hidden = true;
+            photoLightboxImage.src = "";
+        });
+
+        photoLightbox.addEventListener("click", (event) => {
+            if (event.target === photoLightbox) {
+                photoLightbox.hidden = true;
+                photoLightboxImage.src = "";
+            }
+        });
+
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !photoLightbox.hidden) {
+                photoLightbox.hidden = true;
+                photoLightboxImage.src = "";
+            }
+        });
+
+        trykBtn.addEventListener("click", () => {
+            questionBtn.hidden = false;
+            yesNoBoxes.hidden = false;
+        });
+
+        questionBtn.addEventListener("click", () => {
+            yesNoBoxes.hidden = false;
+        });
+
+        choiceNej.addEventListener("click", () => {
+            choiceNej.classList.add("is-selected");
+            choiceJa.classList.remove("is-selected");
+            nejMessage.hidden = false;
+            confirmationBox.hidden = true;
+        });
+
+        choiceJa.addEventListener("click", () => {
+            choiceJa.classList.add("is-selected");
+            choiceNej.classList.remove("is-selected");
+            nejMessage.hidden = true;
+            confirmEmailBtn.href = buildConfirmationEmailHref();
+            confirmationBox.hidden = false;
+        });
+
+        window.addEventListener("resize", () => {
+            syncPhotoColumnOffset();
+        });
+    </script>
 </body>
 </html>

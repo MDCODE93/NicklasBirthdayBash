@@ -24,11 +24,11 @@
                     <h2 class="section-title">How To Use</h2>
                     <div class="data-row">
                         <div class="label">Step 1</div>
-                        <div class="value">Set GitHub username and repository values below.</div>
+                        <div class="value">Open this page in your browser.</div>
                     </div>
                     <div class="data-row">
                         <div class="label">Step 2</div>
-                        <div class="value">Open this page in browser and verify the generated URL.</div>
+                        <div class="value">Verify that the generated URL points to birthday-invite/index.html.</div>
                     </div>
                     <div class="data-row">
                         <div class="label">Step 3</div>
@@ -40,7 +40,7 @@
                     <div class="note" style="margin-top: 18px;">
                         Paste your public invite URL here:
                     </div>
-                    <input id="url-input" type="url" placeholder="https://your-domain.com/birthday-invite/nicklasbirthdaybash.html" style="width: 100%; margin-top: 8px; padding: 10px 12px; border: 1px solid rgba(36,31,26,0.2); border-radius: 10px; font: inherit;">
+                    <input id="url-input" type="url" placeholder="https://your-domain.com/birthday-invite/index.html" style="width: 100%; margin-top: 8px; padding: 10px 12px; border: 1px solid rgba(36,31,26,0.2); border-radius: 10px; font: inherit;">
                     <a id="generate-btn" class="cta" href="#" style="margin-top: 12px;">Generate QR From URL</a>
                 </div>
 
@@ -56,10 +56,10 @@
     </main>
 
     <script>
-        const CUSTOM_PUBLIC_URL = "";
+        const CUSTOM_PUBLIC_URL = "https://mdcode93.github.io/NicklasBirthdayBash/birthday-invite/index.html?v=20260329-3";
         const GITHUB_USERNAME = "MDCODE93";
         const GITHUB_REPOSITORY = "NicklasBirthdayBash";
-        const DEFAULT_TARGET_PAGE = "nicklasbirthdaybash.html";
+        const DEFAULT_TARGET_PAGE = "index.html";
         const isHttp = window.location.protocol === "http:" || window.location.protocol === "https:";
         const autoInviteUrl = isHttp ? new URL(DEFAULT_TARGET_PAGE, window.location.href).href : "";
         const storedUrl = localStorage.getItem("birthdayInviteUrl") || "";
@@ -74,7 +74,19 @@
         }
 
         const githubPagesUrl = buildGithubPagesUrl();
-        let inviteUrl = CUSTOM_PUBLIC_URL.trim() || storedUrl || githubPagesUrl || (isHttp ? autoInviteUrl : "");
+        function migrateOldTarget(url) {
+            if (!url) {
+                return "";
+            }
+            return url.replace(/nicklasbirthdaybash\.html/gi, DEFAULT_TARGET_PAGE);
+        }
+
+        const migratedStoredUrl = migrateOldTarget(storedUrl);
+        let inviteUrl = CUSTOM_PUBLIC_URL.trim() || githubPagesUrl || (isHttp ? autoInviteUrl : "") || migratedStoredUrl;
+
+        if (inviteUrl) {
+            localStorage.setItem("birthdayInviteUrl", inviteUrl);
+        }
 
         const qrImage = document.getElementById("qr-image");
         const inviteLink = document.getElementById("invite-link");
