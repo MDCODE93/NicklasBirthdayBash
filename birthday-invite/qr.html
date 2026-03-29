@@ -56,7 +56,7 @@
     </main>
 
     <script>
-        const CUSTOM_PUBLIC_URL = "https://mdcode93.github.io/NicklasBirthdayBash/birthday-invite/index.html?v=20260329-3";
+        const LOCKED_INVITE_URL = "https://mdcode93.github.io/NicklasBirthdayBash/birthday-invite/index.html?v=20260329-3";
         const GITHUB_USERNAME = "MDCODE93";
         const GITHUB_REPOSITORY = "NicklasBirthdayBash";
         const DEFAULT_TARGET_PAGE = "index.html";
@@ -82,11 +82,8 @@
         }
 
         const migratedStoredUrl = migrateOldTarget(storedUrl);
-        let inviteUrl = CUSTOM_PUBLIC_URL.trim() || githubPagesUrl || (isHttp ? autoInviteUrl : "") || migratedStoredUrl;
-
-        if (inviteUrl) {
-            localStorage.setItem("birthdayInviteUrl", inviteUrl);
-        }
+        const inviteUrl = LOCKED_INVITE_URL.trim() || githubPagesUrl || (isHttp ? autoInviteUrl : "") || migratedStoredUrl;
+        localStorage.setItem("birthdayInviteUrl", inviteUrl);
 
         const qrImage = document.getElementById("qr-image");
         const inviteLink = document.getElementById("invite-link");
@@ -122,20 +119,15 @@
         }
 
         urlInput.value = inviteUrl;
+        urlInput.readOnly = true;
+        generateBtn.style.pointerEvents = "none";
+        generateBtn.style.opacity = "0.6";
+        generateBtn.textContent = "QR Locked To Invite URL";
         renderQr(inviteUrl);
 
         generateBtn.addEventListener("click", function (event) {
             event.preventDefault();
-            const candidate = urlInput.value.trim();
-
-            if (!looksLikeHttpUrl(candidate)) {
-                statusMessage.textContent = "Please enter a valid URL starting with http:// or https://.";
-                return;
-            }
-
-            inviteUrl = candidate;
-            localStorage.setItem("birthdayInviteUrl", inviteUrl);
-            renderQr(inviteUrl);
+            statusMessage.textContent = "QR is locked to the invitation page URL.";
         });
     </script>
 </body>
